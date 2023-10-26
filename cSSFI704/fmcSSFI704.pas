@@ -7,6 +7,7 @@ BUG FIX：REELID ＆ BOX 尾數箱異常
 4.新增fun3
 5.新增EX刷入
 6.新增功能2
+7.新增fun4
 }
 
 unit fmcSSFI704;
