@@ -5,6 +5,7 @@ BUG FIX：REELID ＆ BOX 尾數箱異常
 2.新增參數sSN 檢核時需排除自己 (fmcSSFI7046)
 3.增加回傳刷入數量
 4.新增功能2
+5.新增fun3
 }
 
 unit fmcSSFI704;
