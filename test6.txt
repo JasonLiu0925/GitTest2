@@ -1,1 +1,9 @@
 modify1
+
+func f1(){
+
+}
+
+func f2(){
+
+}
