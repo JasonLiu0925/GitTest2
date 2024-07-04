@@ -1,15 +1,14 @@
 block1{
-asdfuajdksfjksajfdlsjlfdsjfl
-asdfsdfjkaksdfjlksjldfk
-1231rifjeshovjnsoidgjao
+AAAAAAA
+BBBBBBBBBBBBBBBB
 }
 
 block2{
-kka;sjdfklsjd;fkjaldf
-alsjdf;kajdljflskdjflkj
+BBBBBBBBBBBBBBB
+
 }
 
 block3{
-
+AAAAAAAAA
 
 }
