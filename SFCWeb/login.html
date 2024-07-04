@@ -1,0 +1,227 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+	 <meta name="viewport" content="width=device-width, initial-scale=1">	 
+    <script type="text/ecmascript" src="js/jquery-1.11.2.min.js"></script>    
+    <script src="js/bootstrap.min.js"></script>	     
+	 <link rel="stylesheet" type="text/css" href="css/bootstrap.min.css">
+	 <!--<link rel="stylesheet" href="css/bootstrap-select.css">-->
+	 <!--<script src="js/bootstrap-select.js"></script>-->
+	 <script src="js/jquery-ui.js"></script>
+
+	 <!--
+	 <link href="css/fontawesome.css" rel="stylesheet">
+	 <link href="css/brands.min.css" rel="stylesheet">
+	 <link href="css/solid.min.css" rel="stylesheet">
+	 <script defer src="js/brands.min.js"></script>
+	 <script defer src="js/solid.min.js"></script>
+	 <script defer src="js/fontawesome.min.js"></script>
+	-->	
+	 
+   <!-- 
+	 <link rel="stylesheet" type="text/css" media="screen" href="css/jquery-ui.css" />    	 
+	 <link rel="stylesheet" type="text/css" media="screen" href="css/ui.jqgrid.css" />	
+	-->	 
+	
+	  <style>
+			body{margin-left: 5px; padding: 2px}
+			.table-hover tbody tr:hover td {
+	    		background: Azure;
+			}
+			.modal-dialog {
+			  top:25% !important;
+			}	
+			
+	  </style>
+	  <script>		  
+		String.prototype.trim = function() {
+    		return this.replace(/(^\s*)|(\s*$)/g, "");
+		};
+		function getUrlVars() {
+         var vars = {};
+         var parts = document.location.href.replace(/[?&]+([^=&]+)=([^&]*)/gi, function(m,key,value) {
+           vars[key] = value;
+         });
+         return vars;
+		}
+		var siteInvoke = {"DBSWeb":"invoke","DPSWeb":"invoke2","SFCWeb":"invoke3","RMAWeb":"invoke4","WMSWeb":"invoke5"}
+		var browseURL =  document.location.href;		
+		var pathURL = browseURL.replace(document.location.origin,"").substring(1);
+		var siteName = pathURL.substring(0,pathURL.indexOf("/"));
+		var baseURL = document.location.origin + "/MES/";
+		var invokeURL = baseURL + siteInvoke[siteName]+"?sCode=";
+		var autthToken ="";
+		var bllogin = false;
+		
+		function setcooky(name,val,expire_days){
+		   //var expire_days = 1; // 過期日期(天)
+         var d = new Date();
+         d.setTime(d.getTime() + (expire_days * 24 * 60 * 60 * 1000));
+         var expires = "expires=" + d.toGMTString();
+         document.cookie = name + "=" + val + "; " + expires ;
+		}
+
+		function getcooky(name){
+			var x = document.cookie;
+			var c_array = x.split(";");
+			var retVal="";
+			for(var i = 0;i<c_array.length;i++){
+				if(c_array[i].trim().indexOf(name+"=")==0){
+					retVal = c_array[i].substring(c_array[i].indexOf("=")+1);
+					break;
+				}
+			}
+
+			return retVal;
+		}
+
+		$(document).ready(function(){			
+			if(bllogin==true){
+
+			}else{
+				$('#loginModal').modal({backdrop: "static"});
+				var savedname = getcooky("name");
+				if(savedname!=""){
+					$('#username').val(savedname);
+					$('#remember').prop('checked', true)
+				}
+				
+			}			
+			//var webapi = getUrlVars()["api"];
+			//var callback = getUrlVars()["cb"];
+			var callback = document.location.href.substring(document.location.href.indexOf("?cb=")+4);
+			$('#btn_login').on('click', function(){
+				doAuth();
+				afterSuccessAuth();
+			});	
+			
+			function afterSuccessAuth(){
+				if(bllogin){
+				   $('#loginModal').modal('hide');					
+					//$('#myModal').modal('show');
+					if($('#remember').is(":checked")==true){
+						setcooky("name",$('#username').val(),1);
+					}else{
+						setcooky("name","",-1);
+					}
+					setcooky("UID",$('#username').val(),1);
+					if(callback==undefined || callback==""){
+					   document.location.href = "index.html";
+					}else{
+						//document.location.href = "grid.html?api=" + webapi;
+						document.location.href = callback;
+					}
+				}
+			}
+			
+			function doAuth(){
+				$.ajax(
+               {
+			      	 type: "POST",
+			      	 contentType: "application/json; charset=utf-8",
+			      	 url: baseURL + "auth",
+			      	 dataType: "json",
+			      	 data : JSON.stringify({username: $('#username').val(),password:$('#pwd').val()}) ,
+			      	 async:false,
+						 success: function (response) {							
+							if(response.token !== undefined)	{
+								if(response.token!=""){
+									autthToken = response.token;
+									bllogin = true;
+									// $.ajaxSetup({
+   								// 	headers : {
+        							// 		'Authorization' : 'Bearer ' + autthToken
+    								// 	}
+									// });
+									setcooky("token",autthToken,1);
+									return true;
+								}
+							}
+							$('#loginModal').effect("shake");
+						 },
+						 error:function(response) {
+							$('#loginModal').effect("shake");
+							 // alert("status:"+response.statusText);
+							$('#message').html("<b>Message: </b><font color=red>"+response.responseJSON.status + " - " + response.responseJSON.message+"</font>");
+			    		 }
+				});	 
+			}
+			
+			
+			$("#username").on("keyup", function(e) {			
+				if(e.which == 13){
+					doAuth();
+					afterSuccessAuth();
+				}
+	      });
+	      $("#pwd").on("keyup", function(e) {
+		    	if(e.which == 13){
+					 doAuth();
+					 afterSuccessAuth();
+		    	}
+	      });
+
+		});  //end of document ready
+		
+		
+		
+		
+
+		$(document).ajaxStart(function () {
+			//$.blockUI();
+		}).ajaxStop( function(){
+			//$.unblockUI();
+	      //getData();
+		});
+
+		
+</script>
+</head>
+<body>
+			<!-- Modal -->
+		<div class="modal fade" id="loginModal" role="dialog">
+				<div class="modal-dialog modal-dialog-centered" role="document">
+					<div class="modal-content">
+						<div class="modal-header" style="background-color:whitesmoke;cursor: move;">
+							
+							<h4 class="modal-title">使用者登入</h4>
+						</div>
+						<div class="modal-body" align=center>
+							
+									<form class="form-horizontal" action="">
+										
+										  <div class="form-group">
+											 <label class="control-label col-sm-3" for="username">User Name:</label>
+											 <div class="col-sm-5">												
+												<input type="text" class="form-control" id="username" placeholder="Enter username">
+											 </div>
+										  </div>
+										  <div class="form-group">
+											 <label class="control-label col-sm-3" for="pwd">Password:</label>
+											 <div class="col-sm-5"> 
+												<input type="password" class="form-control" id="pwd" placeholder="Enter password">
+												<div style="position:relative;float:left"><input type="checkbox" id="remember">Remember Me</div>
+											 </div>											 
+											 <div class="col-sm-2">
+												<button type="button" class="btn btn-info" id="btn_login">Submit</button>
+											 </div>
+										  </div>									
+										  <div class="form-group">												
+												<div class="col-sm-5" id="message" style="position:relative;float:left"></div>
+										  </div>
+									</form>
+							
+						</div>
+						<!-- 
+						<div class="modal-footer">						
+							<button type="submit" class="btn btn-danger btn-default" data-dismiss="modal"><span class="glyphicon glyphicon-remove"></span> Cancel</button>
+						</div>
+						-->
+					</div>
+				</div>
+			</div>
+</body>
+</html>

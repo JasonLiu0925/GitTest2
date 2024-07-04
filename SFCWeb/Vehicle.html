@@ -1,0 +1,382 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="180000" />
+  <title>載具管理頁面</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+      <style>
+
+        /* 隱藏所有tab的內容 */
+        .tabcontent {
+          display: none;
+          /* display: flex;
+          flex-direction: row; 控制橫向排列 */
+        }
+
+        /* 設定選取到的tab的樣式 */
+        .tablinks.active {
+          background-color: #ccc;
+        }
+
+        /* 設定頁籤的樣式 */
+        .tab {
+          display: flex;
+          justify-content: center;
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+          /* display: inline-block; */
+        }
+
+        .tab button {
+          background-color: inherit;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+        }
+
+        .tab button:hover {
+          background-color: #ddd;
+        }
+
+        /* 設定選取到的tab內容的樣式 */
+        .tabcontent {
+          animation: fadeEffect 1s;
+          /* display: inline-block; */
+        }
+        
+        
+
+        /* 設定頁籤內容淡入淡出效果 */
+        @keyframes fadeEffect {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+
+      </style>
+</head>
+
+<body>
+
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+  <script type="text/javascript" src="UI/js/Vehicle.js?v1.5"></script>
+  
+  <!-- <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+  
+
+  <script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script> 
+
+
+  
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+       <section  >
+        <div class="row ">
+          <div class="col ">
+              <!---Seach Statr-->
+              <div class="row justify-content-between">
+
+                  <div class="col-md-10 p-2">
+                    <h2>載具管理頁面</h2>
+                    <div class="tab">
+                      <button class="tablinks" onclick="openTab(event, 'Tab1')">新增機種頁面</button>
+                      <button class="tablinks" onclick="openTab(event, 'Tab2')">載具共用管理頁面</button>
+                      <button class="tablinks" onclick="openTab(event, 'Tab3')">載具查詢頁面(含報廢)</button>
+                      <button class="tablinks" onclick="openTab(event, 'Tab4')">載具狀態控管頁面</button>
+                    </div>
+                      <form class="form-inline ">
+                          <div class="form-row ">
+
+
+
+                            <div id="Tab1" class="tabcontent" > 
+
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>SKU:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SKU">
+                                <button type="button" class="btn btn-secondary btn-sm" id="sku">...</button>
+                              </div>
+
+                              
+                            <div class="input-group m-2" >
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>Country:</i>
+                                  </div>
+                              </span>
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                <select name="inOut" class="form-control" id="SHIFTY" >
+                                  <option value="T">台灣(TW)</option>
+                                  <option value="V">越南(VN)</option>
+                                  
+                                </select>
+                            </div>
+
+                            <div class="input-group m-2" width="200px">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>Factory:</i>
+                                  </div>
+                              </span>
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                <select name="inOut" class="form-control" id="SHIFTY" >
+                                  <option value="1">華亞一廠</option>
+                                  <option value="2">華亞二廠</option>
+                                  <option value="3">華亞三廠</option>
+                                  
+                                </select>
+                            </div>
+
+
+                            <div class="input-group m-2" >
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>Process:</i>
+                                  </div>
+                              </span>
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                <select name="inOut" class="form-control" id="SHIFTY">
+                                  <option value="S">SMT</option>
+                                  <option value="D">DIP</option> 
+                                  
+                                </select>
+                            </div>
+
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>Num:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="Num"> 
+                              </div>
+
+
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>儲位:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="Num"> 
+                              </div>
+
+                            </div>
+
+
+                            </div>
+                            
+                            <div id="Tab2" class="tabcontent" >
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>機種料號:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SKU">
+                                <button type="button" class="btn btn-secondary btn-sm" id="sku">...</button>
+                              </div>
+
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>共用機種料號:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="Datecode"> 
+                              </div>
+
+
+                            </div>
+                            
+                            <div id="Tab3" class="tabcontent">
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>SKU:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SKU">
+                                <button type="button" class="btn btn-secondary btn-sm" id="sku">...</button>
+                              </div>
+
+
+
+
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>SN:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="sn">
+                              </div>  
+                             
+                            <div class="input-group m-2" width="200px">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>Type:</i>
+                                  </div>
+                              </span>
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                <select name="inOut" class="form-control" id="SHIFTY" >
+                                  <option value="1">正常</option>
+                                  <option value="2">報廢</option>
+                                  
+                                </select>
+                            </div>
+
+                            </div>
+                            
+                            <div id="Tab4" class="tabcontent">
+                              <div class="input-group m-2" id="sDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>SN:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SN"> 
+                              </div>
+
+                            </div>
+                              
+
+
+
+
+                          </div> 
+                                                      
+                          <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary " type="button" id="searchBtn1">
+                                      <i class="fas fa-search "></i>
+                                  </button>
+                              </span>
+                          </div>
+
+                          
+                           
+                      </form>
+                      
+                      
+                  </div>
+
+
+              </div>
+              <!---Seach end-->
+          </div>
+          <div id="listModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+          data-keyboard="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+                <div class="modal-title ">
+                  <h5></h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+                </button>
+      
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+                      <center>
+                        <table id="jqGridList" class="table table-bordered "></table>
+                        <div id="jqGridListPager"></div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="modal-footer " style="text-align:center;">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+      
+
+        <div class="m-3 p-3 bg-white rounded box-shadow  " id="showDiv">
+          <div class="row" ">
+          <div class='col-md-12 p-0 m-0'>
+            <table id="jqGrid1" class="table table-bordered "></table>
+            <div id="jqGrid1Pager"></div>
+          </div>
+        </div>
+        <div class="row" ">
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid2" class="table table-bordered "></table>
+            <div id="jqGrid2Pager"></div>
+          </div>
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid3" class="table table-bordered "></table>
+            <div id="jqGrid3Pager"></div>
+          </div>
+        </div>
+          
+        <div id="refreshtime"></div>
+        </div>
+        
+
+      </section>
+      <!----------------------List End---------------------------------->
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

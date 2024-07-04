@@ -1,0 +1,89 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="180000" />
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+
+</head>
+
+<body>
+
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+  <script type="text/javascript" src="UI/js/Yield_1_6_1_chart.js?v1.5"></script>
+  <script type="text/ecmascript" src="/GBLWeb/Module/js/chart.js"></script>
+  <link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+  <script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js"></script>
+  <!-- <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+  
+
+  
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script>
+
+
+
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+
+       <div class="container-fluid ">
+        <div class="row p-3" id="chartList">
+        </div>
+        <button type="button" class="btn btn-info" id='searchBtn1'>Detail</button>
+      </div>
+
+
+
+      <div class="m-3 p-3 bg-white rounded box-shadow  " id="showDiv">
+        <div class="row" ">
+        <div class='col-md-12 p-0 m-0'>
+          <table id="jqGrid1" class="table table-bordered "></table>
+          <div id="jqGrid1Pager"></div>
+        </div>
+      </div>
+        
+      <div id="refreshtime"></div>
+      </div>
+
+
+      <!----------------------List End---------------------------------->
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

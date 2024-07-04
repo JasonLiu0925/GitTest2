@@ -1,0 +1,289 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="180000" />
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+
+</head>
+
+<body>
+
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/grid.js"></script>
+  <script type="text/javascript" src="UI/js/search-instantlyproducedata.js?v1.5"></script>
+  
+  <!-- <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+  
+
+  
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script>
+
+
+
+
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+       <section  >
+        <div class="row ">
+          <div class="col ">
+              <!---Seach Statr-->
+              <div class="row justify-content-between">
+
+                  <div class="col-md-10 p-2">
+
+                      <form class="form-inline ">
+                          <div class="form-row ">
+
+                            <div class="input-group m-2" id="sDateDiv">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>開始日期:</i>
+                                  </div>
+                              </span>
+                              <input type="text" class="form-control"  id="sDate">
+                              </div>
+
+
+                          <div class="input-group m-2" id="eDateDiv">
+                            <span class="input-group-prepend input-group-addon ">
+                                <div class="input-group-text ">
+                                    <i>結束日期:</i>
+                                </div>
+                            </span>
+                            <input type="text" class="form-control"  id="eDate">
+                        </div>
+
+
+
+
+                              <div class="input-group m-2" id="sDateDiv">
+                                  <span class="input-group-prepend input-group-addon ">
+                                      <div class="input-group-text ">
+                                          <i>部門:</i>
+                                      </div>
+                                  </span>
+                                  <input type="text" class="form-control"  id="deptInput">
+                                  <button type="button" class="btn btn-secondary btn-sm" id="deptListButton">...</button>
+                              </div>
+                              
+                              <div class="input-group m-2">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>線別:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="lineList" >
+                                <button type="button" class="btn btn-secondary btn-sm" id="lineListButton">...</button>
+                              </div>
+
+                              <div class="input-group m-2" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>製程:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="processList" >
+                                <button type="button" class="btn btn-secondary btn-sm" id="processListButton">...</button>
+                              </div>
+
+                              <div class="input-group m-2" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>製令單號:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="woList" >
+                                <button type="button" class="btn btn-secondary btn-sm" id="woListButton">...</button>
+                              </div>
+
+                              <div class="input-group m-2" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>料號:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="pnumList" >
+                              </div>
+
+
+                              <div class="input-group m-2" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>顯示:</i>
+                                    </div>
+                                </span>
+                                <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                  <select name="inOut" class="form-control" id="showdatatype">
+                                    <option value="ALL" >全部</option>
+                                    <option value="R">良率紅燈</option>
+                                    <option value="O">良率橘燈</option>
+                                    <option value="Y">良率黃燈</option>
+                                    <option value="RO">良率紅燈、橘燈</option>
+                                    <option value="ROY">良率紅燈、橘燈、黃燈</option>
+                                    <option value="N">良率正常</option>
+                                  </select>
+                              </div>
+
+
+                            <div class="input-group m-2" id="inOutDiv">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>計算連續N不良:</i>
+                                  </div>
+                              </span>
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                <select name="inOut" class="form-control" id="showcount">
+                                  <option value="N" >N.不計算</option>
+                                  <option value="Y">Y.計算</option>
+                                </select>
+                            </div>
+
+                            <div class="input-group m-2" id="inOutDiv">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>更新頻率:</i>
+                                  </div>
+                              </span>
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                <select name="inOut" class="form-control" id="setRefreshTime">
+                                  <option value="1">1分鐘</option>
+                                  <option value="2">2分鐘</option>
+                                  <option value="3">3分鐘</option>
+                                  <option value="5">5分鐘</option>
+                                  <option value="10">10分鐘</option>
+                                  <option value="15">15分鐘</option>
+                                  <option value="30" selected>30分鐘</option>
+                                </select>
+                            </div>
+
+                          </div>
+
+                                                      
+                          <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary " type="button" id="searchBtn1">
+                                      <i class="fas fa-search "></i>
+                                  </button>
+                              </span>
+                          </div>
+                          <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary  " type="reset" id="clearBtn1">
+                                      <i class="fas fa-quidditch"></i>
+                                  </button>
+                              </span>
+                          </div>
+
+                          </div>
+                      </form>
+
+                  </div>
+
+
+              </div>
+              <!---Seach end-->
+          </div>
+          <div id="listModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+          data-keyboard="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+                <div class="modal-title ">
+                  <h5></h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+                </button>
+      
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+                      <center>
+                        <table id="jqGridList" class="table table-bordered "></table>
+                        <div id="jqGridListPager"></div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="modal-footer " style="text-align:center;">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+      
+
+        <div class="m-3 p-3 bg-white rounded box-shadow  " id="wipDiv">
+          <div class="row" ">
+          <div class='col-md-12 p-0 m-0'>
+            <table id="jqGrid1" class="table table-bordered "></table>
+            <div id="jqGrid1Pager"></div>
+          </div>
+        </div>
+        <div class="row" ">
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid2" class="table table-bordered "></table>
+            <div id="jqGrid2Pager"></div>
+          </div>
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid3" class="table table-bordered "></table>
+            <div id="jqGrid3Pager"></div>
+          </div>
+        </div>
+          
+        <div id="refreshtime"></div>
+        </div>
+        
+
+      </section>
+      <!----------------------List End---------------------------------->
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

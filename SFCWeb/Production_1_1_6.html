@@ -1,0 +1,235 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="180000" />
+  <title>製令料號生產狀況</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+
+</head>
+
+<body>
+
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+  <script type="text/javascript" src="UI/js/Production_1_1_6.js?v1.5"></script>
+  
+  <!-- <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+  
+
+  <script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script> 
+
+
+  
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+       <section  >
+        <div class="row ">
+          <div class="col ">
+              <!---Seach Statr-->
+              <div class="row justify-content-between">
+
+                  <div class="col-md-10 p-2">
+                    製令料號生產狀況
+                      <form class="form-inline ">
+                          <div class="form-row ">
+
+                            <div class="input-group m-2" id="sDateDiv">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>Date:</i>
+                                  </div>
+                              </span>
+                              <input type="text" class="form-control"  id="sDate">
+                          </div>
+                          
+                          <div class="input-group m-2" id="eDateDiv" >
+                            <span class="input-group-prepend input-group-addon ">
+                                <div class="input-group-text ">
+                                    <i>End Date:</i>
+                                </div>
+                            </span>
+                            <input type="text" class="form-control"  id="eDate" >
+                        </div>
+
+                              <div class="input-group m-2" id="SKUDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>SKU:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SKU">
+                                <button type="button" class="btn btn-secondary btn-sm" id="sku">...</button>
+                            </div>
+
+
+                            <div class="input-group m-2" id="WoDiv">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>WO:</i>
+                                  </div>
+                              </span>
+                              <input type="text" class="form-control"  id="WO">
+                              <button type="button" class="btn btn-secondary btn-sm" id="workorder">...</button>
+                          </div>
+
+                          <div class="input-group m-2" id="excel_div">
+                            <label class="input-group-text" for="excel-file">EXCEL</label>
+                            <input type="file" class="form-control  py-2" id="excel-file">
+          
+                          </div>
+                          
+
+
+
+
+                          </div> 
+
+                          <div class="input-group m-2" width="200px" id="length_div" >
+                            <span class="input-group-prepend input-group-addon ">
+                                <div class="input-group-text ">
+                                    <i>TYPE:</i>
+                                </div>
+                            </span>
+                            <!-- <input type="text" class="form-control"  id="inOut"> -->
+                              <select name="inOut" class="form-control" id="type_1" >
+                                <!-- <option value="1">華亞一廠</option> -->
+                                <option value="1">料號查製令狀態</option>
+                                <option value="2" selected>以製令批次查詢</option> 
+                                
+                              </select>
+                          </div>			
+
+
+
+                                                      
+                          <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary " type="button" id="searchBtn1">
+                                      <i class="fas fa-search "></i>
+                                  </button>
+                              </span>
+                          </div>
+
+                          <div class="input-group m-2">
+                            <span class="input-group-append ">
+                                <button class="btn btn-outline-secondary " type="button" id="searchBtn2">
+                                  <i class="fas fa-file-upload"></i>
+                                </button>
+                            </span>
+                        </div>
+
+
+                          <a href="https://sfcportal.senao.com/SFCDB2Web/download/wo_sample.xlsx" download="wo_sample" id="sample_download">範本下載</a>
+                           
+                      </form>
+                      
+                      
+                  </div>
+
+
+              </div>
+              <!---Seach end-->
+          </div>
+          <div id="listModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+          data-keyboard="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+                <div class="modal-title ">
+                  <h5></h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+                </button>
+      
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+                      <center>
+                        <table id="jqGridList" class="table table-bordered "></table>
+                        <div id="jqGridListPager"></div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="modal-footer " style="text-align:center;">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+      
+
+        <div class="m-3 p-3 bg-white rounded box-shadow  " id="showDiv">
+          <div class="row" ">
+          <div class='col-md-12 p-0 m-0'>
+            <table id="jqGrid1" class="table table-bordered "></table>
+            <div id="jqGrid1Pager"></div>
+          </div>
+        </div>
+        <div class="row" ">
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid2" class="table table-bordered "></table>
+            <div id="jqGrid2Pager"></div>
+          </div>
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid3" class="table table-bordered "></table>
+            <div id="jqGrid3Pager"></div>
+          </div>
+        </div>
+          
+        <div id="refreshtime"></div>
+        </div>
+        
+
+      </section>
+      <!----------------------List End---------------------------------->
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

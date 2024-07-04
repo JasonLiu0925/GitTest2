@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<HTML LANG="en">
+
+<HEAD>
+	<META CHARSET="utf-8">
+	<META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge">
+	<META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+	<TITLE>SFC - Holad Upload </TITLE>
+	<META NAME="description" CONTENT="">
+	<META NAME="author" CONTENT="templatemo">
+
+
+
+
+
+</HEAD>
+
+<BODY>
+	<!---Menu Start--->
+	<div id='menu'></div>
+	<!---Menu End--->
+
+
+
+
+	<!--Body content Start-->
+
+	<main role="main" id="main">
+
+		<div class="row ">
+			<div class="col ">
+				<!---Seach Statr-->
+				<div class="row justify-content-end">
+  
+					<div class="col-md-10 p-2">
+  
+						<form class="form-inline ">
+							<div class="form-row ">
+							
+
+								<div class="input-group m-2">
+									<label class="input-group-text" for="excel-file">EXCEL</label>
+									<input type="file" class="form-control  py-2" id="excel-file">
+									
+								  </div>
+								 
+								<div class="input-group m-2">
+									<span class="input-group-append ">
+										<button class="btn btn-outline-secondary " type="button" id="excelUp">
+											<i class="fas fa-file-upload"></i>
+										</button>
+									</span>
+								</div>
+								<div class="input-group m-2">
+									<span class="input-group-append ">
+										<button class="btn btn-outline-secondary  " type="reset" id="clearBtn1">
+											<i class="fas fa-quidditch"></i>
+										</button>
+									</span>
+								</div>
+  
+							</div>
+						</form>
+						<diV> <a href="HoladTmp.xlsx">Download Temp File</a></diV>
+					</div>
+  
+  
+				</div>
+				<!---Seach end-->
+			</div>
+  
+  
+		</div>
+
+		<div class="container-fluid">
+			<div class="row p-2">
+				<div class="col  content-widget  bg-white" style="text-align:center;font-size: 14px;">
+					<table id="jqGrid1" class="table table-bordered "></table>
+					<div id="jqGrid1Pager"></div>
+				</div>
+
+			</div>
+		</div>
+	</main>
+	<!--Body Content End-->
+
+                  
+
+
+	<!--Bottom Start-->
+
+	<div id="bottom"></div>
+	<!--Bottom End-->
+	<!---------------------------Load   include File-------------------- -->
+
+	<script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+	<script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+	<script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+	<!-- jquery-loading v1.3.0 -->
+	<link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+	<script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js"></script>
+	<script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+	<link href="UI/css/FormDetail.css" rel="stylesheet" />
+	<script type="text/javascript" src="UI/js/SFC-WO_SN_Hold_Upload.js"></script>
+
+
+
+
+</BODY>
+
+</HTML>

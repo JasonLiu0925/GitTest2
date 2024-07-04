@@ -1,0 +1,146 @@
+<!DOCTYPE html>
+<HTML LANG="en">
+
+<HEAD>
+	<META CHARSET="utf-8">
+	<META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge">
+	<META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+	<TITLE>重工-序號上傳</TITLE>
+	<META NAME="description" CONTENT="">
+	<META NAME="author" CONTENT="templatemo">
+
+
+
+
+
+</HEAD>
+
+<BODY>
+	<!---Menu Start--->
+	<div id='menu'></div>
+	<!---Menu End--->
+
+
+
+
+	<!--Body content Start-->
+
+	<main role="main" id="main">
+		<div class="container-fluid">
+
+			<div class="row justify-content-center">
+				<div class="col ">
+					<!---Seach Statr-->
+					<form class="form-inline ">
+						<div class="form-row ">
+							<div class="input-group m-2">
+								<span class="input-group-prepend input-group-addon ">
+									<div class="input-group-text    ">
+										<i>來源制令:</i>
+									</div>
+								</span>
+								<input class="form-control py-2 " type="text" value="" id="woSource" required />
+
+							</div>
+							<div class="input-group m-2">
+								<span class="input-group-prepend input-group-addon ">
+									<div class="input-group-text    ">
+										<i>重工制令:</i>
+									</div>
+								</span>
+								<input class="form-control py-2 " type="text" value="" id="woRework" required />
+
+							</div>
+							<div class="input-group m-2">
+								<span class="input-group-prepend input-group-addon ">
+									<div class="input-group-text    ">
+										<i>解除組合序號:</i>
+									</div>
+								</span>
+								<select class="form-control" id="unLinkSN">
+									<option value="Y">Y</option>
+									<option value="N">N</option>
+								</select>
+
+							</div>
+							<div class="input-group m-2">
+								<span class="input-group-prepend input-group-addon ">
+									<div class="input-group-text    ">
+										<i>更換機種:</i>
+									</div>
+								</span>
+								<select class="form-control" id="changeWOType">
+									<option value="N">N</option>
+									<option value="Y">Y</option>
+								</select>
+
+							</div>
+							<div class="input-group m-2">
+								<div class="custom-file">
+									<input type="file" class="custom-file-input" id="excel-file"
+										>
+									<label class="custom-file-label" for="excel-file"
+										data-browse="選擇檔案"></label>
+
+
+								</div>
+
+							</div>
+
+							<div class="input-group m-2">
+								<span class="input-group-append ">
+									<button class="btn btn-outline-secondary " type="button" id="excelUp">
+										<i class="fas fa-file-upload"></i>
+									</button>
+								</span>
+							</div>
+							<div class="input-group m-2">
+								<span class="input-group-append ">
+									<button class="btn btn-outline-secondary  " type="reset" id="clearBtn1">
+										<i class="fas fa-quidditch"></i>
+									</button>
+								</span>
+							</div>
+
+						</div>
+					</form>
+					<!---Seach end-->
+				</div>
+
+
+			</div>
+			<div class="row p-2">
+				<div class="col  content-widget  bg-white" style="text-align:center;font-size: 14px;">
+					<table id="jqGrid1" class="table table-bordered "></table>
+					<div id="jqGrid1Pager"></div>
+				</div>
+
+			</div>
+		</div>
+	</main>
+	<!--Body Content End-->
+
+
+
+
+	<!--Bottom Start-->
+
+	<div id="bottom"></div>
+	<!--Bottom End-->
+	<!---------------------------Load   include File-------------------- -->
+
+	<script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+	<script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+	<!-- jquery-loading v1.3.0 -->
+	<link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+	<script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js"></script>
+	<script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+	<link href="UI/css/FormDetail.css" rel="stylesheet" />
+	<script type="text/javascript" src="UI/js/SFC-WO_SN_Modify.js?v3"></script>
+
+
+
+
+</BODY>
+
+</HTML>

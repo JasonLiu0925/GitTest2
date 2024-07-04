@@ -1,0 +1,319 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="180000" />
+  <title>測溫板出庫/報廢作業</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+      <style>
+
+
+		
+      </style>
+</head>
+
+<body>
+
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+  <script type="text/javascript" src="UI/js/SMT_3_2.js?v1.5"></script>
+   
+  <script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script> 
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script> -->
+  
+
+  
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+       <section  >
+        <div class="row ">
+          <div class="col ">
+              <!---Seach Statr-->
+              <div class="row justify-content-between">
+
+                  <div class="col-md-12 p-2">
+
+                    <div class="form-group form-inline m-2" id="h2Div">
+                      <h3>測溫板出庫/報廢作業</h3>
+                      <div class="input-group m-2" id="Factory1Div" >
+                        <span class="input-group-prepend input-group-addon ">
+                            <div class="input-group-text ">
+                                <i>廠別:</i>
+                            </div>
+                        </span>
+
+
+                        <select name="inOut" class="form-control" id="Factory1" >
+                          <!-- <option value="1">華亞一廠</option> -->
+                          <!-- <option value="一廠">一廠</option>
+                          <option value="二廠">二廠</option> -->
+                          
+                        </select>
+                      </div>
+					    
+					  
+					  
+                    </div>
+ 
+           
+                      <form class="form-inline ">
+                          <div class="form-row ">
+
+ 
+
+                              <div class="input-group m-2" id="stocktype3_div" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>使用:</i>
+                                    </div>
+                                </span>
+                                <select name="inOut" class="form-control" id="stocktype" >
+                                  <option value="2">使用</option> 
+                                  <option value="3">報廢</option> 
+                                </select>
+
+                                <!-- <input  type="text" class="form-control" value="出庫" readonly > -->
+                              </div>
+
+
+
+                              <div class="input-group m-2" id="sDateDiv" id="employeeId3_div">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>EmployeeId:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="employeeId3"> 
+                              </div>
+
+
+                              <div class="input-group m-2" id="SN3_div">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>測溫版Id:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SN3"> 
+                              </div>
+							  
+ 
+ 
+
+                             
+
+                              <div class="input-group m-2" id="stockOutDate3_div" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>日期:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="stockOutDate" style="width: 150px;" value="" readonly>
+                              </div>
+ 
+							  <div class="input-group m-2" width="200px" id="SCRAP_div" hidden>
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>報廢原因:</i>
+                                    </div>
+                                </span>
+                                <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                  <select name="inOut" class="form-control" id="SCRAP" >
+                                    <option value="1">限用次數超過</option>
+                                    <option value="2">張力不足</option>
+                                    <option value="3">破損</option>
+                                    <option value="4">鋼板改版</option>
+                                    
+                                  </select>
+                              </div>
+							    
+
+                            <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary " type="button" id="searchBtn1">
+                                      <i class="fas fa-search "></i>
+                                  </button>
+                              </span>
+                          </div> 
+
+
+
+                            </div>
+                             
+
+
+                            <div class="input-group m-2"> 
+                                
+                              <span class="input-group-append ">
+                                <button class="btn btn-outline-secondary " type="button" id="createForm" hidden>
+                                  <i class="fa fa-plus-circle "></i>
+                                </button>
+                            </span>
+  
+  
+                              
+                          </div>
+
+                          </div> 
+                                                      
+                     
+
+                          <div id="tab3_somin" >
+                            規格說明: <br>
+                            1.只有分使用跟報廢<br> 
+                          </div>
+ 
+                           
+                      </form>
+                      
+                      
+                  </div>
+
+
+              </div>
+              <!---Seach end-->
+          </div>
+          <div id="listModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+          data-keyboard="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+                <div class="modal-title ">
+                  <h5></h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+                </button>
+      
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+                      <center>
+                        <table id="jqGridList" class="table table-bordered "></table>
+                        <div id="jqGridListPager"></div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="modal-footer " style="text-align:center;">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+      
+
+        <div class="m-3 p-3 bg-white rounded box-shadow  " id="showDiv1">
+          <div class="row" ">
+          <div class='col-md-12 p-0 m-0'>
+            <table id="jqGrid1" class="table table-bordered "></table>
+            <div id="jqGrid1Pager"></div>
+          </div>
+        </div>
+        <div class="row" " id="showDiv2">
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid2" class="table table-bordered "></table>
+            <div id="jqGrid2Pager"></div>
+          </div>
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid3" class="table table-bordered "></table>
+            <div id="jqGrid3Pager"></div>
+          </div>
+        </div>
+          
+        <div id="refreshtime"></div>
+        </div>
+        
+
+      </section>
+      <!----------------------List End---------------------------------->
+
+ 
+ 
+      <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:whitesmoke;cursor: move;">
+    
+              <h4 class="modal-title">新增序號功能</h4>
+            </div>
+            <div class="modal-body" align=center>
+    
+              <form class="form-horizontal" action="">
+                  <div class="form-group">
+                    <label class="control-label col-sm-4" for="header">開頭固定碼:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="header" placeholder="Enter header">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd">起始流水號:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="startseq" placeholder="Enter startseq">
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <div class="col-sm-2">
+                      <button type="button" class="btn btn-info" id="btn_Submit">Submit</button>
+                    </div>
+                  </div>
+    
+              </form>
+    
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

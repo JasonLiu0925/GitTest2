@@ -1,0 +1,242 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="1800" />
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" /> -->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+ 
+    
+</head>
+
+<body>
+
+  
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB_csv.js"></script>
+  <link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+  <script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js"></script>
+  <script type="text/javascript" src="UI/js/Repair_1_2.js?v1.5"></script>
+  
+  <!-- <script src="https://cdn.bootcss.com/moment.js/2.18.1/moment-with-locales.min.js"></script> -->
+  <!-- <script src="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/js/bootstrap-datetimepicker.min.js"></script> -->
+  
+
+  
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script>
+
+
+
+
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+       <section  >
+        <div class="row ">
+          <div class="col ">
+              <!---Seach Statr-->
+              <div class="row justify-content-end1">
+
+                  <div class="col-md-10 p-2">
+                    
+
+                      <form class="form-inline ">
+                          <div class="form-row ">
+                              <div class="input-group m-2" id="sDateDiv">
+                                  <span class="input-group-prepend input-group-addon ">
+                                      <div class="input-group-text ">
+                                          <i>Start Date:</i>
+                                      </div>
+                                  </span>
+                                  <input type="text" class="form-control"  id="sDate">
+                              </div>
+                              
+                              <div class="input-group m-2" id="eDateDiv">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>End Date:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="eDate" >
+                            </div>
+                            <div class="input-group m-2" id="selcitem">
+                              <span class="input-group-prepend input-group-addon ">
+                                  <div class="input-group-text ">
+                                      <i>查詢項目:</i>
+                                  </div>
+                              </span> 
+                              <!-- <input type="text" class="form-control"  id="inOut"> -->
+                               <select name="inOut" class="form-control" id="selcitem1">
+                                <option value="Repair_1_3">維修區間查詢</option>
+                                <option value="Repair_1_3_1">目前待修明細</option>
+                            </select>
+                            </div>
+                          </div>                    
+                          <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary " type="button" id="searchBtn1">
+                                      <i class="fas fa-search "></i>
+                                  </button>
+                              </span>
+                          </div>
+                          <div class="input-group m-2">
+                              <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary  " type="reset" id="clearBtn1">
+                                      <i class="fas fa-quidditch"></i>
+                                  </button>
+                              </span>
+                          </div>
+
+                          </div>
+                      </form>
+
+                      
+
+                      <div class="container"> 
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo">簽入簽出查詢</button>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo1">待修明細查詢</button>
+                        <button type="button" class="btn btn-info" data-toggle="collapse" data-target="#demo2">維修區間查詢</button>
+                        <div id="demo" class="collapse in">
+                          簽入簽出查詢:</br>
+                          1.在使用者設定的時間範圍內選擇簽入，則所有簽入的序號(包含該時間區段有多次簽入的)都會顯示；簽出亦然。</br>
+                          2.若選簽出入都顯示，則在該時間範圍的都會顯示，但假設有筆序號是 20220102 簽入 20220106簽出，而查詢條件是 20220101~20220104，則只會顯示該序號的簽入序號</br>
+                          但又已經簽出了，所以會有完修日期，結論就是已經有簽出紀錄的則完修天數就會有資料，若無則為空</br>
+                        </div>
+                        
+                        <div id="demo1" class="collapse in">
+                          待修明細查詢:</br>
+                          所有簽入未簽出的。提供時間區間供選擇，若時間區間內有簽入的序號在不同日期簽出了，則一樣不顯示。</br>
+                          例如有個序號在1/3簽入，1/10簽出，則你在1/11查詢1/3這個序號是查不到的。</br>
+                          但你在1/3~1/10都是查的到這筆序號，因為它就是在"維修中"
+                        </div>
+                        
+                        <div id="demo2" class="collapse in">
+                          維修區間查詢:</br>
+                          就是維修資訊，所有完修跟報廢的序號，有完修天數。</br>
+                          目前待修明細:</br>
+                          目前SFC原有系統，不需輸入時間，會把全部資訊撈取出來，時間約五分鐘，請耐心等候。</br>
+                        </div>
+                      </div>
+
+ 
+
+
+                      <!-- <p>
+                        <a class="btn btn-primary" data-toggle="collapse" href="#multiCollapseExample1" role="button" aria-expanded="false" aria-controls="multiCollapseExample1">簽入簽出查詢</a>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" href="#multiCollapseExample2" aria-expanded="false" aria-controls="multiCollapseExample2">待修明細查詢</button>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" href="#multiCollapseExample3" aria-expanded="false" aria-controls="multiCollapseExample3">維修區間查詢</button>
+                        <button class="btn btn-primary" type="button" data-toggle="collapse" data-bs-target=".multi-collapse" aria-expanded="false" aria-controls="multiCollapseExample1 multiCollapseExample2">全開</button>
+                      </p>
+                      <div class="row">
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample1">
+                            <div class="card card-body">
+                              簽入簽出查詢：</br>
+                              1.在使用者設定的時間範圍內選擇簽入，則所有簽入的序號(包含該時間區段有多次簽入的)都會顯示；簽出亦然。</br>
+                              2.若選簽出入都顯示，則在該時間範圍的都會顯示，但假設有筆序號是 20220102 簽入 20220106簽出，而查詢條件是 20220101~20220104，則只會顯示該序號的簽入序號</br>
+                              但又已經簽出了，所以會有完修日期，結論就是已經有簽出紀錄的則完修天數就會有資料，若無則為空</br>
+                             </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample2">
+                            <div class="card card-body">
+                              <br>待修明細查詢:</br> 
+                              <br>所有簽入未簽出的。</br>        
+                            </div>
+                          </div>
+                        </div>
+                        <div class="col">
+                          <div class="collapse multi-collapse" id="multiCollapseExample3">
+                            <div class="card card-body">
+                              維修區間查詢:就是維修資訊，查詢出來的欄位跟簽出入不同。
+                            </div>
+                          </div>
+                        </div>
+                      </div>
+                      -->
+
+
+
+
+                      <!-- <div>簽入簽出查詢：</br>
+                        1.在使用者設定的時間範圍內選擇簽入，則所有簽入的序號(包含該時間區段有多次簽入的)都會顯示；簽出亦然。</br>
+                        2.若選簽出入都顯示，則在該時間範圍的都會顯示，但假設有筆序號是 20220102 簽入 20220106簽出，而查詢條件是 20220101~20220104，則只會顯示該序號的簽入序號</br>
+                        但又已經簽出了，所以會有完修日期，結論就是已經有簽出紀錄的則完修天數就會有資料，若無則為空</br>
+                      <br>待修明細查詢:所有簽入未簽出的。</br>
+                      
+                      <br>維修區間查詢:就是維修資訊，查詢出來的欄位跟簽出入不同。</br>
+                      </div> -->
+                      
+                                
+                  </div>
+
+
+              </div>
+              <!---Seach end-->
+          </div>
+
+
+      </div>
+
+        <div class="m-3 p-3 bg-white rounded box-shadow  " id="wipDiv">
+          <div class="row" ">
+          <div class='col-md-12 p-0 m-0'>
+            <table id="jqGrid1" class="table table-bordered "></table>
+            <div id="jqGrid1Pager"></div>
+          </div>
+        </div>
+        <div class="row" ">
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid2" class="table table-bordered "></table>
+            <div id="jqGrid2Pager"></div>
+          </div>
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid3" class="table table-bordered "></table>
+            <div id="jqGrid3Pager"></div>
+          </div>
+        </div>
+          
+         
+        </div>
+        
+
+      </section>
+      <!----------------------List End---------------------------------->
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

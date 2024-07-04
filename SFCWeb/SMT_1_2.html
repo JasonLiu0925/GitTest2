@@ -1,0 +1,508 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta http-equiv="refresh" content="180000" />
+  <title>回溫出庫報廢作業</title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="">
+  <!-- <link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet" />-->
+  <!-- <link href="https://cdn.bootcss.com/bootstrap-datetimepicker/4.17.47/css/bootstrap-datetimepicker.min.css" rel="stylesheet" />  -->
+
+  <!-- <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/offcanvas.css" />
+  <link rel="stylesheet" type="text/css" media="screen" href="/GBLWeb/Module/css/projectTabs.css" /> -->
+  <link rel="stylesheet" type="text/css" media="screen"
+      href="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.css" />
+      <style>
+
+        /* 隱藏所有tab的內容 */
+        .tabcontent {
+          display: none;
+          /* display: flex;
+          flex-direction: row; 控制橫向排列 */
+        }
+
+        /* 設定選取到的tab的樣式 */
+        .tablinks.active {
+          background-color: #ccc;
+        }
+
+        /* 設定頁籤的樣式 */
+        .tab {
+          display: flex;
+          justify-content: center;
+          overflow: hidden;
+          border: 1px solid #ccc;
+          background-color: #f1f1f1;
+          /* display: inline-block; */
+        }
+
+        .tab button {
+          background-color: inherit;
+          border: none;
+          outline: none;
+          cursor: pointer;
+          padding: 14px 16px;
+          transition: 0.3s;
+        }
+
+        .tab button:hover {
+          background-color: #ddd;
+        }
+
+        /* 設定選取到的tab內容的樣式 */
+        .tabcontent {
+          animation: fadeEffect 1s;
+          /* display: inline-block; */
+        }
+        
+        
+
+        /* 設定頁籤內容淡入淡出效果 */
+        @keyframes fadeEffect {
+          from {
+            opacity: 0;
+          }
+          to {
+            opacity: 1;
+          }
+        }
+
+        .modal {
+          display: none;
+          position: fixed;
+          z-index: 1;
+          left: 0;
+          top: 0;
+          width: 100%;
+          height: 100%;
+          overflow: auto;
+          background-color: rgba(0, 0, 0, 0.4);
+        }
+
+        .modal-content {
+          background-color: #fefefe;
+          margin: 15% auto;
+          padding: 20px;
+          border: 1px solid #888;
+          width: 80%;
+        }
+
+        .close {
+          color: #aaa;
+          float: right;
+          font-size: 28px;
+          font-weight: bold;
+        }
+        .modal-backdrop {
+          position: absolute;
+          top: 0;
+          left: 0;
+          width: 100%;
+          height: 100%;
+          background-color: rgba(0, 0, 0, 0.5);
+        }
+        .close:hover,
+        .close:focus {
+          color: black;
+          text-decoration: none;
+          cursor: pointer;
+        }
+
+        #myModal {
+          position: fixed;
+          top: 50%;
+          left: 50%;
+          transform: translate(-50%, -50%);
+          width: 20%;
+          height: auto;
+        }
+        .myModal input {
+          margin-bottom: 10px; 
+        }
+
+        #myModal .modal-content input {
+          margin-bottom: 10px;
+        }
+
+        #myModal .modal-content button {
+          margin-top: 10px;
+        }
+
+        #myModal .modal-content {
+          text-align: center;
+        }
+
+        #myModal .modal-content button {
+          margin-top: 10px;
+          display: inline-block;
+          text-align: center;
+        }
+
+
+        #myModal1 {
+          margin-left: 5px;
+          padding: 2px
+        }
+
+        #myModal1 .table-hover tbody tr:hover td {
+          background: Azure;
+        }
+
+
+        .form-horizontal .form-group {
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+
+        .form-horizontal .form-group label {
+          flex: 1;
+          text-align: right;
+          margin-right: 10px;
+        }
+
+        .form-horizontal .form-group .form-control {
+          flex: 3;
+          width: 100%;
+        }
+        h2 {
+          text-align: left;
+        }
+
+        #Factory1Div {
+          display: flex;
+          justify-content: flex-end;
+        }
+
+
+        #h2Div {
+          padding: 10px; /* 設置固定內邊距 */
+          vertical-align: baseline;
+        }
+
+        #h2Div > * + * {
+          margin-left: 200px; /* 設置固定外邊距 */
+        }
+
+
+      </style>
+</head>
+
+<body>
+
+
+  <!---------------------------Load   include File-------------------- -->
+  <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+  <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+  <script type="text/javascript" src="UI/js/SMT_1_2.js?v1.5"></script>
+   
+  <script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+  <script type="text/javascript" src="/GBLWeb/API/bootstrap-datepicker-1.9/bootstrap-datepicker.min.js"></script> 
+  <!-- <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.css">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/css/ui.jqgrid.min.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jqueryui/1.12.1/jquery-ui.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/free-jqgrid/4.15.5/jquery.jqgrid.min.js"></script> -->
+  
+
+  
+  <!---Menu Start--->
+  <div id='menu'></div>
+  <!---Menu End--->
+  <!--Main Content Start-->
+  <main role="main" class="container-fluid" id="main">
+
+ 
+    <!----------------------Seach End---------------------------------->
+       <!----------------------List Start-------------------------------->
+       <section  >
+        <div class="row ">
+          <div class="col ">
+              <!---Seach Statr-->
+              <div class="row justify-content-between">
+
+                  <div class="col-md-12 p-2">
+
+                    <div class="form-group form-inline m-2" id="h2Div">
+                      <h2>回溫出庫報廢作業</h2>
+                      <div class="input-group m-2" id="Factory1Div" >
+                        <span class="input-group-prepend input-group-addon ">
+                            <div class="input-group-text ">
+                                <i>廠別:</i>
+                            </div>
+                        </span>
+
+
+                        <select name="inOut" class="form-control" id="Factory1" >
+                          <!-- <option value="1">華亞一廠</option> -->
+                          <!-- <option value="一廠">一廠</option>
+                          <option value="二廠">二廠</option> -->
+                          
+                        </select>
+                      </div>
+                    </div>
+ 
+           
+                      <form class="form-inline ">
+                          <div class="form-row ">
+
+ 
+
+                              <div class="input-group m-2" id="stocktype3_div" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>出入庫別:</i>
+                                    </div>
+                                </span>
+                                <select name="inOut" class="form-control" id="stocktype" >
+                                  <option value="2">出庫</option>
+                                  <option value="3">回溫</option>
+                                  <!-- <option value="4">繳回</option> -->
+                                  <option value="5">報廢</option>
+                                  
+                                </select>
+
+                                <!-- <input  type="text" class="form-control" value="出庫" readonly > -->
+                              </div>
+
+
+
+                              <div class="input-group m-2" id="sDateDiv" id="employeeId3_div">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>EmployeeId:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="employeeId3"> 
+                              </div>
+
+
+                              <div class="input-group m-2" id="SN3_div">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>SN:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="SN3"> 
+                              </div>
+
+                              <div class="input-group m-2" id="LINE3_div">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>LINE:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="LINE3"> 
+                                <button type="button" class="btn btn-secondary btn-sm" id="line">...</button>
+                              </div>
+
+
+                              <div class="input-group m-2" width="200px" id="TYPE3_div">
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>Type:</i>
+                                    </div>
+                                </span>
+                                <!-- <input type="text" class="form-control"  id="inOut"> -->
+                                  <select name="inOut" class="form-control" id="TH004_3" >
+                                    <!-- <option value="1">華亞一廠</option> -->
+                                    <option value="2">無鉛錫膏</option>
+                                    <option value="3">紅膠</option>
+                                    
+                                  </select>
+                              </div>
+
+                             
+
+
+                              <div class="input-group m-2" id="stockOutDate3_div" >
+                                <span class="input-group-prepend input-group-addon ">
+                                    <div class="input-group-text ">
+                                        <i>出庫日期:</i>
+                                    </div>
+                                </span>
+                                <input type="text" class="form-control"  id="stockOutDate" value="" readonly>
+                              </div>
+
+ 
+                              <label id="ischeckstir"><input type="checkbox" name="lang-1" id ="stir" value="javascript" >是否有攪拌3分鐘</label>
+
+
+
+                              <div class="input-group m-2">
+                                <span class="input-group-append ">
+                                    <button class="btn btn-outline-secondary " type="button" id="searchBtn1">
+                                        <i class="fas fa-search "></i>
+                                    </button>
+                                </span>
+                            </div> 
+  
+                              <div class="input-group m-2"> 
+                                  
+                                <span class="input-group-append ">
+                                  <button class="btn btn-outline-secondary " type="button" id="createForm" hidden>
+                                    <i class="fa fa-plus-circle "></i>
+                                  </button>
+                              </span>
+
+                            </div>
+                             
+
+
+  
+  
+                              
+                          </div>
+
+                          </div> 
+                                                      
+                     
+
+                          <div id="tab3_somin" >
+                            規格說明: <br>
+                            1.錫膏有出庫數量限制，紅膏沒有<br>
+                            2.需執行單據確認(入庫)才能出庫<br>
+                            3.出庫前要先回溫<br>
+                          </div>
+ 
+                           
+                      </form>
+                      
+                      
+                  </div>
+
+
+              </div>
+              <!---Seach end-->
+          </div>
+          <div id="listModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+          data-keyboard="true">
+          <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+              <div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+                <div class="modal-title ">
+                  <h5></h5>
+                </div>
+                <button type="button" class="close" data-dismiss="modal">
+                  <span>&times;</span>
+                </button>
+      
+              </div>
+              <div class="modal-body">
+                <div class="container-fluid">
+                  <div class="row">
+                    <div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+                      <center>
+                        <table id="jqGridList" class="table table-bordered "></table>
+                        <div id="jqGridListPager"></div>
+                      </center>
+                    </div>
+                  </div>
+                </div>
+              </div>
+      
+              <div class="modal-footer " style="text-align:center;">
+                <button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        
+      </div>
+
+
+      
+
+        <div class="m-3 p-3 bg-white rounded box-shadow  " id="showDiv1">
+          <div class="row" ">
+          <div class='col-md-12 p-0 m-0'>
+            <table id="jqGrid1" class="table table-bordered "></table>
+            <div id="jqGrid1Pager"></div>
+          </div>
+        </div>
+        <div class="row" " id="showDiv2">
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid2" class="table table-bordered "></table>
+            <div id="jqGrid2Pager"></div>
+          </div>
+          <div class='col-md-6 p-0 m-0'>
+            <table id="jqGrid3" class="table table-bordered "></table>
+            <div id="jqGrid3Pager"></div>
+          </div>
+        </div>
+          
+        <div id="refreshtime"></div>
+        </div>
+        
+
+      </section>
+      <!----------------------List End---------------------------------->
+
+      <div id="myModal" class="modal">
+        <div class="modal-content">
+          <span class="close">&times;</span>
+          <p>請輸入序號開頭：</p>
+          <input type="text" id="serialNumber" />
+          <button id="submit" style="width: 30%; ">提交</button>
+        </div>
+      </div>
+
+      <div class="modal fade" id="myModal1" role="dialog">
+        <div class="modal-dialog modal-dialog-centered" role="document">
+          <div class="modal-content">
+            <div class="modal-header" style="background-color:whitesmoke;cursor: move;">
+    
+              <h4 class="modal-title">新增序號功能</h4>
+            </div>
+            <div class="modal-body" align=center>
+    
+              <form class="form-horizontal" action="">
+                  <div class="form-group">
+                    <label class="control-label col-sm-4" for="header">開頭固定碼:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="header" placeholder="Enter header">
+                    </div>
+                  </div>
+                  <div class="form-group">
+                    <label class="control-label col-sm-4" for="pwd">起始流水號:</label>
+                    <div class="col-sm-7">
+                      <input type="text" class="form-control" id="startseq" placeholder="Enter startseq">
+                    </div>
+                </div>
+                  <div class="form-group">
+                    <div class="col-sm-2">
+                      <button type="button" class="btn btn-info" id="btn_Submit">Submit</button>
+                    </div>
+                  </div>
+    
+              </form>
+    
+            </div>
+
+          </div>
+        </div>
+      </div>
+
+
+  </main>
+  <!--Main Content End-->
+
+
+
+  <!--Body Content End-->
+
+  <!--Bottom Start-->
+
+  <div id="bottom"></div>
+  <!--Bottom End-->
+
+
+
+
+  
+</body>
+
+
+</html>

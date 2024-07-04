@@ -1,0 +1,684 @@
+<!DOCTYPE html>
+<HTML LANG="en">
+
+<HEAD>
+	<META CHARSET="utf-8">
+	<META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge">
+	<META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+	<TITLE>eSFC-General </TITLE>
+	<META NAME="description" CONTENT="">
+	<META NAME="author" CONTENT="templatemo">
+
+
+	<style>
+		.text-white-50 {
+			color: rgba(255, 255, 255, .5);
+		}
+
+		.bg-purple {
+			background-color: var(--purple);
+		}
+
+		.border-bottom {
+			border-bottom: 1px solid #e5e5e5;
+		}
+
+		.box-shadow {
+			box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+		}
+
+		.lh-100 {
+			line-height: 1;
+		}
+
+		.lh-125 {
+			line-height: 1.25;
+		}
+
+		.lh-150 {
+			line-height: 1.5;
+		}
+
+
+		@media screen and (max-width: 1366px) {
+			html {
+				font-size: 12px;
+			}
+
+		}
+
+		@media screen and (min-width: 1366px) {
+			html {
+				font-size: 16px;
+			}
+		}
+	</style>
+
+
+</HEAD>
+
+<BODY>
+	<!---Menu Start--->
+	<div id='menu'></div>
+	<!---Menu End--->
+
+
+
+
+	<!--Body content Start-->
+	<audio src="ng.wav" id="player"></audio>
+	<main role="main" class="container-fluid ">
+		<div class="jumbotron jumbotron-fluid p-1 m-0 ">
+
+			<form>
+				<!--<div class="d-flex align-items-center p-0 my-0 text-dark bg-light rounded box-shadow m-0 p-0">-->
+				<div class="d-flex text-dark bg-light rounded box-shadow m-0 p-0 ">
+					<div class=" col-md  ">
+
+
+						<div class=" form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">制令單號:</span>
+								</div>
+								<input type="text" class="form-control " id="woDispy" required readonly>
+
+							</div>
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">料號:</span>
+								</div>
+								<input type="text" class="form-control " id="skuDisplay" readonly>
+								<!--<div class="input-group-append">
+									<span class="input-group-text bg-white " id="basic-addon2">分</span>
+								</div>
+							    -->
+							</div>
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">加工順序:</span>
+								</div>
+								<input type="text" class="form-control " id="pSEQDispy" readonly>
+
+							</div>
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<!--<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">製程代號:</span>
+								</div>
+								<input type="text" class="form-control " id="processCodeDispy" readonly>
+								<div class="input-group-append">
+									
+									<span class="input-group-text bg-white d-none" id="processNameDispy"></span>
+								</div>
+							-->
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white d-none" id="processNameDispy"></span>
+								</div>
+								<input type="text" class="form-control " id="processCodeDispy" readonly>
+							</div>
+
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<button type="button" class="btn btn-secondary btn-lg btn-block"
+									id="chageWOButton">換製令</button>
+
+							</div>
+
+						</div>
+					</div>
+					<div class=" col-md">
+						<div class="form-group row  m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white">員工代號:</span>
+								</div>
+								<input type="text" class="form-control " id="eIDDispy" aria-describedby="eName" required
+									readonly>
+								<div class="input-group-append">
+
+									<span class="input-group-text bg-white d-none" id="eNameDispy"></span>
+								</div>
+
+
+							</div>
+						</div>
+
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">生產日期:</span>
+								</div>
+								<input type="text" class="form-control " id="productionDate" readonly>
+
+
+							</div>
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">生產時間:</span>
+								</div>
+								<input type="text" class="form-control " id="productionTime" readonly>
+
+							</div>
+						</div>
+
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">生產總量:</span>
+								</div>
+								<input type="text" class="form-control " id="amountNumber" readonly>
+							</div>
+						</div>
+
+					</div>
+					<div class=" col-md">
+						<div class="form-group row m-1 ">
+
+							<div class="col-xl-12 input-group ">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">站別代號:</span>
+								</div>
+								<input type="text" class="form-control " id="lineCodeDispy" readonly>
+
+
+							</div>
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">過站類別:</span>
+								</div>
+
+								<input type="text" class="form-control " id="transitCategoryDispy" readonly>
+							</div>
+						</div>
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">過站批號:</span>
+								</div>
+								<input type="text" class="form-control " id="passingLotNumber" readonly>
+							</div>
+						</div>
+
+						<div class="form-group row m-1">
+
+							<div class="col-xl-12 input-group">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">過站數量:</span>
+								</div>
+								<input type="text" class="form-control " id="stopsNumber" readonly>
+							</div>
+						</div>
+
+
+					</div>
+					<div class=" col-md-3  ">
+						<table id="numPeopleGrid"></table>
+					</div>
+					<div class=" col-md ">
+
+						<table id="jqGridCount"></table>
+						<h1><span id="QTY"></span></h1>
+
+					</div>
+
+				</div>
+
+			</form>
+			<form>
+				<!--<div class="row p-1">
+					<div class="col-3">
+						<button type="button" class="btn btn-primary btn-lg btn-block" id="loadButton">輸入過站資料</button>
+					</div>
+
+				</div>-->
+			</form>
+		</div>
+		</div>
+		<!--MSG -->
+		<div class="media text-muted  align-middle border-bottom border-gray d-none" style="text-align:center;"
+			id='msgBox'>
+			<div class=" col-md m-0 p-0">
+				<h4>
+					<span class=" text-danger font-weight-bold" id='errMsg'></span>
+				</h4>
+
+			</div>
+
+
+		</div>
+		<div class="card ">
+			<div class="card-header">
+				<div class="row">
+					<div class="col">
+						<form>
+							<div class="form-group row  d-none" id="cwoInput">
+								<div class="col-xl-12 input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text bg-white ">製令單號:</span>
+									</div>
+									<input type="text" class="form-control " id="cwo" autocomplete="off" required>
+
+									<div class="input-group-append">
+										<button type="button" class="btn btn-secondary" id='cwoButton1'>...</button>
+									</div>
+
+								</div>
+							</div>
+							<div class="form-group row  d-none" id="cprocessCodeInput">
+								<div class="col-xl-12 input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text bg-white ">製程代號:</span>
+									</div>
+									<input type="text" class="form-control " id="cprocessCode" autocomplete="off"
+										required>
+									<div class="input-group-append">
+										<button type="button" class="btn btn-secondary" id="cprocessButton">...</button>
+										<span class="input-group-text bg-white d-none" id="cprocessName"></span>
+									</div>
+								</div>
+							</div>
+							<div class=" form-group row d-none" id="clineCodeInput">
+
+								<div class=" col-xl-12 input-group ">
+									<div class=" input-group-prepend">
+										<span class="input-group-text bg-white ">線別代號:</span>
+									</div>
+									<input type="text" class="form-control " id="clineCode" autocomplete="off" required>
+									<div class="input-group-append">
+										<button type="button" class="btn btn-secondary" id="clineButton">...</button>
+										<span class="input-group-text bg-white d-none" id="clineName"></span>
+									</div>
+
+								</div>
+							</div>
+							<div class="form-group row d-none" id="cpassingCategoryInput">
+
+								<div class="col-xl-12 input-group">
+									<div class="input-group-prepend">
+										<span class="input-group-text bg-white ">過站類別:</span>
+									</div>
+									<select class="custom-select " id="cpassingCategory">
+										<option value="P">P：一般過站</option>
+										<option value="X">X：未結過站</option>
+										<option value="Z">Z：補刷過站</option>
+									</select>
+									<button class="btn btn-outline-secondary" type="button"
+										id="chengeWoOKButton">OK</button>
+								</div>
+							</div>
+							<div class=" form-group row d-none" id="cpassingTime">
+								<div class=" col-xl-12 input-group ">
+									<div class="input-group m-2">
+										<span class="input-group-prepend input-group-addon ">
+											<div class="input-group-text    ">
+												<i>過站時間:</i>
+											</div>
+										</span>
+
+										<input class="form-control py-2  datetimepicker-input " type="text" value=""
+											id="csDate1" data-toggle="datetimepicker" data-target="#csDate1" />
+										<span class="input-group-prepend input-group-addon ">
+											<div class="input-group-text ">
+												<i>到</i>
+											</div>
+										</span>
+										<input class="form-control py-2  datetimepicker-input" type="text" value=""
+											id="ceDate1" data-toggle="datetimepicker" data-target="#ceDate1" />
+									</div>
+								</div>
+							</div>
+						</form>
+					</div>
+				</div>
+
+			</div>
+			<div class="card-body d-none p-0" id="gridBox">
+
+
+
+				<div class="media text-muted pt-0  pb-3 d-none" id="jqGrid4Box">
+
+					<div class="col-md-6">
+						<table id="jqGrid5"></table>
+						<div id="jqGridPager5"></div>
+					</div>
+					<div class="col-md-6">
+						<table id="jqGrid4"></table>
+						<div id="jqGridPager4"></div>
+					</div>
+
+
+				</div>
+				<div class="media text-muted pt-0  pb-3 d-none " id="jqGrid1Box">
+					<table id="jqGrid1"></table>
+					<div id="jqGridPager1"></div>
+				</div>
+				<diV class="row border-gray border-bottom ">
+
+
+					<!--<div class="media text-muted  align-middle   ">-->
+
+					<div class=" col-md-2 ">
+						<div class="form-group row  ">
+
+							<div class="col-xl-12 input-group  ">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">人數:</span>
+								</div>
+								<input type="text" class="form-control " id="peopleNumber" readonly>
+
+							</div>
+						</div>
+					</div>
+					<div class=" col-md-3 ">
+						<div class="form-group row  ">
+
+							<div class="col-xl-12 input-group ">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">過站序號(按ESC 清除組合資料):</span>
+								</div>
+								<input type="text" class="form-control " id="SN" autocomplete="off">
+
+							</div>
+						</div>
+					</div>
+					<div class=" col-md-5 d-none" id="statueTest">
+						<div class="form-group row  ">
+
+							<div class=" input-group ">
+								<div class="input-group-prepend">
+									<span class="input-group-text bg-white ">檢測結果:</span>
+								</div>
+								<select class="custom-select " id="testResults" readonly>
+									<option class="d-none" value="1">PASS </option>
+									<option value="2">OK </option>
+									<option value="3">NG </option>
+								</select>
+								<div class="input-group-append d-none" id="errCodeBox">
+									<span class="input-group-text">錯誤狀況</span>
+									<input type="text" class="form-control " id="errCode" autocomplete="off">
+									<div class="input-group-append">
+										<button type="button" class="btn btn-secondary" id="errCodeButton">...</button>
+									</div>
+								</div>
+							</div>
+						</div>
+					</div>
+
+					<!--</div>-->
+				</diV>
+				<div class="row">
+					<div class="col-xl-5">
+
+
+						<div class="media text-muted  " id="jqGrid2Box">
+							<table id="jqGrid2"></table>
+							<div id="jqGridPager2"></div>
+						</div>
+
+
+					</div>
+					<div class="col-xl-5">
+
+						<div class="media text-muted " id="jqGrid3Box">
+							<table id="jqGrid3"></table>
+							<div id="jqGridPager3"></div>
+						</div>
+
+					</div>
+					<div class="col-xl-2">
+						<div class="card d-none" id="labCard">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">條碼樣板檔案:</span>
+							</div>
+							<input type="text" class="form-control " id="labFile" >
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">列印張數:</span>
+							</div>
+							<input type="text" class="form-control " id="labCount" >
+							<button type="button" class="btn btn-primary" id="labRPrint">重印</button>
+							<div class="card-body">
+
+								<ul class="nav nav-tabs" id="myTab" role="tablist">
+									<li class="nav-item" role="presentation">
+									  <button class="nav-link active" id="printPara-tab" data-toggle="tab" data-target="#printPara" type="button" role="tab" aria-controls="printPara" aria-selected="true">印表參數</button>
+									</li>
+							
+								  </ul>
+								  <div class="tab-content" id="myTabContent">
+									<div class="tab-pane fade show active" id="printPara" role="tabpanel" aria-labelledby="printPara-tab">
+
+										1
+
+									</div>
+									
+								  </div>
+							</div>
+						  </div>
+						
+
+					</div>
+				</div>
+
+			</div>
+
+
+	</main>
+	<!--Body Content End-->
+
+
+
+	<!-- Modal Start-->
+	<div id="MsgModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+		data-keyboard="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+					<div class="modal-title ">
+						<h5></h5>
+					</div>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+								<center>
+									<table id="jqGridMsg" class="table table-bordered "></table>
+									<div id="jqGridMsgPager"></div>
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer " style="text-align:center;">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal End-->
+	<!-- Modal Start-->
+	<div id="videoModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true"
+		data-backdrop="static" data-keyboard="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+					<div class="modal-title ">
+						<h5>Video Barcode Reader</h5>
+					</div>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+
+								<video muted autoplay id="video" playsinline="true"></video>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+								<div class="select">
+									<label for="videoSource">Video source: </label><select id="videoSource"></select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+
+								<span id="videoMsg" class="text-danger"></span>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+
+								Barcode result: <span id="dbr"></span>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+								<div class="form-group">
+									<label for="dbrlist">Barcode result List</label>
+									<textarea class="form-control" id="dbrlist" rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer " style="text-align:center;">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal End-->
+	<!-- Modal Start-->
+	<div id="overLoadModel" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true"
+		data-backdrop="static" data-keyboard="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+					<div class="modal-title ">
+						<h5>Video Barcode Reader</h5>
+					</div>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+
+								<video muted autoplay id="video" playsinline="true"></video>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+								<div class="select">
+									<label for="videoSource">Video source: </label><select id="videoSource"></select>
+								</div>
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+
+								<span id="videoMsg" class="text-danger"></span>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+
+								Barcode result: <span id="dbr"></span>
+
+							</div>
+						</div>
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+								<div class="form-group">
+									<label for="dbrlist">Barcode result List</label>
+									<textarea class="form-control" id="dbrlist" rows="3"></textarea>
+								</div>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer " style="text-align:center;">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal End-->
+	<!--Bottom Start-->
+
+	<div id="bottom"></div>
+	<!--Bottom End-->
+	<!---------------------------Load   include File-------------------- -->
+
+	<script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+	<script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+	<!-- jquery-loading v1.3.0 -->
+	<link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+	<script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js">
+	</script>
+	<!--web site:https://momentjs.com/ 
+    moment 2.24 -->
+	<script type="text/javascript" src="/GBLWeb/API/moment-2.24.0/moment.js"></script>
+	<!--Tempus Dominus bootstrap-datetimepicker 5.01 -->
+	<script type="text/javascript"
+		src="/GBLWeb/API/tempusdominus-bootstrap-4 _5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+	<link rel="stylesheet" href="/GBLWeb/API/tempusdominus-bootstrap-4 _5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+	<!--<link href="UI/css/FormDetail.css" rel="stylesheet" />-->
+	<!--<script type="text/javascript" src="UI/js/SFISCommonFunctions.js"></script>-->
+	<script type="text/javascript" src="UI/js/SFC-Produce1.js?V0.3"></script>
+	<!--<script async src="examples/js/zxing.js"></script>-->
+	<!--<script src="examples/js/video.js"></script>-->
+
+
+
+
+</BODY>
+
+</HTML>

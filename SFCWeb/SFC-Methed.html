@@ -1,0 +1,248 @@
+<!DOCTYPE html>
+<HTML LANG="en">
+
+<HEAD>
+	<META CHARSET="utf-8">
+	<META HTTP-EQUIV="X-UA-Compatible" CONTENT="IE=edge">
+	<META NAME="viewport" CONTENT="width=device-width, initial-scale=1">
+	<TITLE>SFC - DIP</TITLE>
+	<META NAME="description" CONTENT="">
+	<META NAME="author" CONTENT="templatemo">
+
+
+	<style>
+		.text-white-50 {
+			color: rgba(255, 255, 255, .5);
+		}
+
+		.bg-purple {
+			background-color: var(--purple);
+		}
+
+		.border-bottom {
+			border-bottom: 1px solid #e5e5e5;
+		}
+
+		.box-shadow {
+			box-shadow: 0 .25rem .75rem rgba(0, 0, 0, .05);
+		}
+
+		.lh-100 {
+			line-height: 1;
+		}
+
+		.lh-125 {
+			line-height: 1.25;
+		}
+
+		.lh-150 {
+			line-height: 1.5;
+		}
+	</style>
+
+
+</HEAD>
+
+<BODY>
+	<!---Menu Start--->
+	<div id='menu'></div>
+	<!---Menu End--->
+
+
+
+
+	<!--Body content Start-->
+
+	<main role="main" class="container-fluid">
+		<form>
+			<div class="card text-center">
+				<div class="card-header">
+					SFC WEB TEST
+				</div>
+				<div class="card-body">
+					<!--<div class="form-group row">
+
+						<div class="col-sm-10 input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">掃描設備:</span>
+							</div>
+							<select class="custom-select " id="DeviceID">
+								<option value="1" selected>scanner barcode</option>
+								<option value="2">Video</option>
+							</select>
+						</div>
+					</div>-->
+					<div class="form-group row">
+
+						<div class="col-sm-10 input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">過站類別:</span>
+							</div>
+							<select class="custom-select " id="passingCategory">
+								<option value="P" selected="">P：一般過站</option>
+								<option value="X">X：未結過站</option>
+								<option value="Z">Z：補刷過站</option>
+							</select>
+						</div>
+					</div>
+					<div class=" form-group row" id="passingTime">
+
+						<div class=" col-sm-10 input-group ">
+							<div class="input-group m-2">
+								<span class="input-group-prepend input-group-addon ">
+									<div class="input-group-text    ">
+										<i>過站時間:</i>
+									</div>
+								</span>
+
+								<input class="form-control py-2  datetimepicker-input " type="text" value="" id="sDate1"
+									data-toggle="datetimepicker" data-target="#sDate1" required />
+								<span class="input-group-prepend input-group-addon ">
+									<div class="input-group-text ">
+										<i>到</i>
+									</div>
+								</span>
+								<input class="form-control py-2  datetimepicker-input" type="text" value="" id="eDate1"
+									data-toggle="datetimepicker" data-target="#eDate1" required />
+							</div>
+						</div>
+					</div>
+					<div class="form-group row  ">
+						<div class="col-sm-10 input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">制令單號:</span>
+							</div>
+							<input type="text" class="form-control " id="wo" required>
+							<!--
+						<div class="input-group-append">
+							<button type="button" class="btn btn-secondary" id='woButton1'>...</button>
+						</div>
+						-->
+						</div>
+					</div>
+					<div class="form-group row">
+
+						<div class="col-sm-10 input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">加工順序:</span>
+							</div>
+							<input type="text" class="form-control " id="pSEQ" readonly>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-secondary" id="seqButton">...</button>
+							</div>
+						</div>
+					</div>
+					<div class="form-group row  ">
+						<div class="col-sm-10 input-group">
+							<div class="input-group-prepend">
+								<span class="input-group-text bg-white ">製程代號:</span>
+							</div>
+							<input type="text" class="form-control " id="processCode" readonly>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-secondary" id="processButton">...</button>
+								<span class="input-group-text bg-white d-none" id="processName""></span>
+						</div>							
+				</div>
+				</div>
+				<div class=" form-group row ">
+
+					<div class=" col-sm-10 input-group ">
+						<div class=" input-group-prepend">
+									<span class="input-group-text bg-white ">站別代號:</span>
+							</div>
+							<input type="text" class="form-control " id="lineCode" readonly>
+							<div class="input-group-append">
+								<button type="button" class="btn btn-secondary" id="lineButton">...</button>
+								<span class="input-group-text bg-white d-none" id="lineName"></span>
+							</div>
+
+						</div>
+					</div>
+					
+					<div class="row" id='numPeopleDiv'>
+						<div class="col-sm-10">
+							<table id="numPeopleGrid"></table>
+							<div id="numPeopleGridPager"></div>
+						</div>
+					</div>
+				</div>
+		</form>
+		<div class="card-footer text-muted">
+			<button class="btn btn-outline-dark" id="setWOBtn">OK</button>
+			<button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+		</div>
+		</div>
+
+
+
+
+	</main>
+	<!--Body Content End-->
+
+
+
+	<!-- Modal Start-->
+	<div id="MsgModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+		data-keyboard="true">
+		<div class="modal-dialog modal-lg">
+			<div class="modal-content">
+				<div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+					<div class="modal-title ">
+						<h5></h5>
+					</div>
+					<button type="button" class="close" data-dismiss="modal">
+						<span>&times;</span>
+					</button>
+
+				</div>
+				<div class="modal-body">
+					<div class="container-fluid">
+						<div class="row">
+							<div class="col m-0 p-0 align-middle" style="text-align:center;font-size: 14px;">
+								<center>
+									<table id="jqGridMsg" class="table table-bordered "></table>
+									<div id="jqGridMsgPager"></div>
+								</center>
+							</div>
+						</div>
+					</div>
+				</div>
+
+				<div class="modal-footer " style="text-align:center;">
+					<button type="button" class="btn btn-outline-dark" data-dismiss="modal">OK</button>
+				</div>
+			</div>
+		</div>
+	</div>
+
+	<!-- Modal End-->
+
+	<!--Bottom Start-->
+
+	<div id="bottom"></div>
+	<!--Bottom End-->
+	<!---------------------------Load   include File-------------------- -->
+
+	<script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+	<script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+	<!-- jquery-loading v1.3.0 -->
+	<link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+	<script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js">
+	</script>
+	<!--web site:https://momentjs.com/ 
+    moment 2.24 -->
+	<script type="text/javascript" src="/GBLWeb/API/moment-2.24.0/moment.js"></script>
+	<!--web site:https://tempusdominus.github.io/bootstrap-4/ 
+    Tempus Dominus bootstrap-datetimepicker 5.01 -->
+	<script type="text/javascript"
+		src="/GBLWeb/API/tempusdominus-bootstrap-4 _5.0.1/js/tempusdominus-bootstrap-4.min.js"></script>
+	<link rel="stylesheet" href="/GBLWeb/API/tempusdominus-bootstrap-4 _5.0.1/css/tempusdominus-bootstrap-4.min.css" />
+	<!--<link href="UI/css/FormDetail.css" rel="stylesheet" />-->
+	<script type="text/javascript" src="UI/js/SFISCommonFunctions.js"></script>
+	<script type="text/javascript" src="UI/js/SFC-Methed.js?ver=1.1"></script>
+
+
+
+</BODY>
+
+</HTML>

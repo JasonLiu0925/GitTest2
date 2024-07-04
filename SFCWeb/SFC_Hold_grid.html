@@ -1,0 +1,99 @@
+<html>
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <title>SFC Hold-grid practice</title>
+    <meta name="description" content="">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" href="">
+</head>
+
+<body>
+    <!---Menu Start--->
+    <div id='menu'></div>
+    <!---Menu End--->
+    <!--
+    <label>ID </label>>
+    <input type="text" id="txt_id" value = "00002">
+    <input type="button" id="btn_search" value="搜尋">
+    <hr/>
+
+    -->
+
+    <div class="chart-container">
+        <div class='form-group row m-1'>
+            <div class=' input-group'>
+                <div class='input-group-prepend'><span class='input-group-text bg-white '>Key:</span></div><input
+                    type='text' class='form-control ' id='okSN'><span class='input-group-append '><button
+                        class='btn btn-outline-secondary  ' type='reset' id='okClearBtn'><i
+                            class='fas fa-redo'></i></button></span><span class='input-group-append '><button
+                        class='btn btn-outline-secondary  ' type='button' id='excelUp'><i
+                            class='fas fa-file-upload'></i></button></span>
+            </div>
+        </div>
+        <div class="my-3 p-3 bg-white rounded box-shadow row" id='wipDiv'>
+            <div class='col '>
+
+                <table id="jqGrid1" class="table table-bordered "></table>
+                <div id="jqGridPager1"></div>
+            </div>
+
+        </div>
+
+    </div>
+    <!--Bottom Start-->
+
+    <div id="bottom"></div>
+    <!--Bottom End-->
+    <!-- Modal Start-->
+    <div id="qryModal" class="modal inmodal fade" tabindex="-1" role="dialog" aria-hidden="true" data-backdrop="static"
+        data-keyboard="true">
+        <div class="modal-dialog modal-lg">
+            <div class="modal-content">
+                <div class="modal-header" style="background-color:lightseagreen; color:white;font-size: 20px;">
+                    <div class="modal-title ">
+                        <h5>Batch upload</h5>
+                    </div>
+                    <button type="button" class="close" data-dismiss="modal">
+                        <span>&times;</span>
+                    </button>
+
+                </div>
+                <div class="modal-body">
+
+                   <!--Key : <select id="pKey">
+                        <option value="MAC">MAC</option>
+                        <option value="Serial No.">SN</option>
+                    </select>--> 
+                </div>
+                <div class="modal-body">
+                    <input type="file" id="excel-file" class="form-control-file" size="100">
+                    <a href="excel\HoldTemp.xlsx">Donload Temp File</a>
+                </div>
+
+                <div class="modal-footer">
+                    <button class="btn btn-outline-dark" id="upOk">OK</button>
+                    <button type="button" class="btn btn-outline-dark" data-dismiss="modal">Cancel</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal End-->
+    <!---------------------------Load   include File-------------------- -->
+    <script type="text/javascript" src="/GBLWeb/Module/js/global.js"></script>
+    <script type="text/javascript" src="/GBLWeb/Module/js/gridDB.js"></script>
+    <!--web site:https://momentjs.com/ 
+    moment 2.24 -->
+    <script type="text/javascript" src="/GBLWeb/API/moment-2.24.0/moment.js"></script>
+    	<!-- jquery-loading v1.3.0 -->
+	<link href="/GBLWeb/API/jquery-loading-master/src/loading.css" rel="stylesheet" />
+	<script type="text/javascript" src="/GBLWeb/API/jquery-loading-master/dist/jquery.loading.min.js"></script>
+	<script lang="javascript" src="/GBLWeb/API/sheetjs-master-0.15.6/dist/xlsx.full.min.js"></script>
+    <script type="text/javascript" src="UI/js/SFC_Hold_grid.js"></script>
+</body>
+
+
+</html>
